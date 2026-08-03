@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3C Construcciones · Informe de campaña Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#063B49;
+  --teal:#036051;
+  --mist:#DFEAF3;
+  --edge:#B1CFE6;
+  --haze:#D3DEE6;
+  --signal:#FFEB3B;
+  --paper:#FBFCFD;
+  --white:#FFFFFF;
+
+  --display:'Inter',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'Inter',system-ui,sans-serif;
+
+  --gut:clamp(20px,5vw,64px);
+  --maxw:1080px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+
+/* ---------- shared type ---------- */
+.eyebrow{
+  font-family:var(--mono);
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--teal);
+}
+.band .eyebrow{color:var(--edge)}
+h2.sec{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(26px,4vw,38px);
+  letter-spacing:-.02em;
+  line-height:1.12;
+  margin:10px 0 18px;
+  max-width:22ch;
+}
+.lede{font-size:clamp(16px,2vw,18px);max-width:62ch;color:#0d4b5c}
+.note{font-family:var(--mono);font-size:12px;line-height:1.7;color:#4b7385}
+
+/* ---------- masthead ---------- */
+.mast{
+  border-bottom:1px solid var(--edge);
+  background:var(--white);
+}
+.mast .wrap{
+  display:flex;flex-wrap:wrap;gap:12px;
+  align-items:baseline;justify-content:space-between;
+  padding-top:18px;padding-bottom:18px;
+}
+.mast strong{font-family:var(--display);font-weight:700;letter-spacing:-.01em;font-size:15px}
+.mast span{font-family:var(--mono);font-size:11.5px;color:#4b7385;letter-spacing:.04em}
+
+/* ---------- hero ---------- */
+.hero{background:var(--ink);color:var(--white);padding:clamp(52px,9vw,104px) 0 clamp(44px,7vw,80px)}
+.hero .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--edge)}
+.query{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(30px,7.4vw,68px);
+  line-height:1.02;
+  letter-spacing:-.035em;
+  margin:22px 0 0;
+}
+.query .q{color:var(--edge);font-weight:500}
+.hero p.thesis{
+  margin-top:26px;max-width:56ch;
+  font-size:clamp(16px,2.1vw,19px);
+  color:#cfe2ee;
+}
+
+/* signature: dimension line */
+.dim{margin-top:34px;max-width:640px}
+.dim-label{
+  font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.06em;
+  font-variant-numeric:tabular-nums;
+  color:var(--signal);margin-bottom:9px;
+}
+.dim-rule{position:relative;height:15px}
+.dim-rule::before{
+  content:"";position:absolute;left:0;top:7px;height:1px;
+  background:var(--signal);width:var(--fill,100%);
+  transform-origin:left;
+  animation:draw 1.1s cubic-bezier(.2,.7,.3,1) both;
+}
+.dim-rule .tick{position:absolute;top:0;width:1px;height:15px;background:var(--signal)}
+.dim-rule .tick.a{left:0}
+.dim-rule .tick.b{left:calc(var(--fill,100%) - 1px)}
+.dim-rest{
+  position:absolute;left:0;top:7px;height:1px;width:100%;
+  background:rgba(177,207,230,.32);
+}
+.dim-foot{
+  display:flex;justify-content:space-between;gap:16px;
+  font-family:var(--mono);font-size:11.5px;color:#9dc0d4;margin-top:9px;
+}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---------- metrics ---------- */
+section{padding:clamp(48px,7.5vw,86px) 0}
+.band{background:var(--ink);color:var(--white)}
+.band h2.sec,.band .lede{color:var(--white)}
+.band .lede{color:#cfe2ee}
+
+.grid{
+  display:grid;gap:1px;background:var(--edge);
+  border:1px solid var(--edge);margin-top:34px;
+  grid-template-columns:repeat(auto-fit,minmax(168px,1fr));
+}
+.cell{background:var(--white);padding:22px 20px 20px}
+.cell .k{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#4b7385}
+.cell .v{
+  font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;
+  font-size:clamp(25px,3.6vw,33px);letter-spacing:-.025em;
+  margin-top:8px;line-height:1.05;
+}
+.cell .u{font-size:14px;font-weight:500;color:#4b7385;margin-left:3px}
+.cell .s{font-size:13.5px;color:#4b7385;margin-top:6px}
+
+/* ---------- monthly bars ---------- */
+.months{margin-top:34px;border-top:1px solid var(--edge)}
+.mrow{
+  display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:center;
+  padding:17px 0;border-bottom:1px solid var(--edge);
+}
+.mname{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#0d4b5c}
+.mname em{display:block;font-style:normal;font-size:11px;color:#6d90a2;margin-top:2px}
+.mbar{display:flex;align-items:center;gap:11px}
+.mfill{height:12px;background:var(--teal);border-radius:1px;min-width:3px}
+.mrow.now .mfill{background:var(--signal);outline:1px solid var(--ink);outline-offset:-1px}
+.mcount{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.band .months{border-top-color:rgba(177,207,230,.3)}
+.band .mrow{border-bottom-color:rgba(177,207,230,.3)}
+.band .mname{color:var(--white)}
+.band .mname em{color:#9dc0d4}
+.band .mfill{background:var(--edge)}
+.band .mrow.now .mfill{background:var(--signal);outline:0}
+.band .mcount{color:var(--white)}
+
+.cpa{
+  display:grid;gap:1px;margin-top:30px;
+  background:rgba(177,207,230,.3);
+  border:1px solid rgba(177,207,230,.3);
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+}
+.cpa div{background:var(--ink);padding:20px}
+.cpa .k{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--edge)}
+.cpa .v{
+  font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;
+  font-size:clamp(24px,3.4vw,31px);letter-spacing:-.025em;margin-top:8px;line-height:1.05;color:#fff;
+}
+.cpa .v .u{font-size:14px;font-weight:500;color:var(--edge);margin-left:3px}
+.cpa .s{font-size:13.5px;color:#9dc0d4;margin-top:6px}
+.cpa div.hi .v{color:var(--signal)}
+
+/* ---------- finding ---------- */
+.finding{
+  display:grid;gap:clamp(24px,4vw,48px);margin-top:34px;
+  grid-template-columns:minmax(0,1fr);
+}
+@media(min-width:820px){.finding{grid-template-columns:auto minmax(0,1fr);align-items:start}}
+.bignum{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(72px,15vw,148px);line-height:.82;
+  letter-spacing:-.05em;color:var(--signal);
+}
+.bignum small{display:block;font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--edge);margin-top:16px;line-height:1.6;text-transform:uppercase}
+.terms{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.term{
+  font-family:var(--mono);font-size:12.5px;
+  border:1px solid rgba(177,207,230,.45);
+  padding:6px 11px;color:#cfe2ee;
+}
+.term b{color:var(--signal);font-weight:500;margin-left:6px}
+
+/* ---------- decisions / stack ---------- */
+.items{margin-top:34px;border-top:1px solid var(--edge)}
+.item{
+  padding:24px 0;border-bottom:1px solid var(--edge);
+  display:grid;gap:6px 30px;grid-template-columns:minmax(0,1fr);
+}
+@media(min-width:760px){.item{grid-template-columns:250px minmax(0,1fr)}}
+.item h3{
+  font-family:var(--display);font-weight:600;font-size:17.5px;
+  letter-spacing:-.01em;line-height:1.25;
+}
+.item .tag{
+  font-family:var(--mono);font-weight:600;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--teal);display:block;margin-bottom:7px;
+}
+.item p{font-size:15.5px;color:#204f60;max-width:60ch}
+.item p + p{margin-top:9px}
+.item .why{color:#4b7385;font-size:14.5px}
+.status{
+  font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.06em;
+  display:inline-block;margin-top:11px;padding:4px 9px;
+  border:1px solid var(--edge);color:#4b7385;
+}
+.status.on{border-color:var(--teal);color:var(--teal)}
+.status.soon{border-color:#c9a800;color:#8a7400;background:#fffdf0}
+
+/* ---------- next ---------- */
+.next{background:var(--mist)}
+.nlist{margin-top:26px;display:grid;gap:14px}
+.nitem{
+  display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start;
+  padding-bottom:14px;border-bottom:1px solid var(--edge);
+}
+.nitem:last-child{border-bottom:0}
+.nitem .m{font-family:var(--mono);font-weight:600;font-size:11.5px;color:var(--teal);padding-top:3px;white-space:nowrap}
+.nitem p{font-size:15.5px;color:#204f60}
+
+footer{background:var(--ink);color:#9dc0d4;padding:34px 0 40px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:baseline}
+footer p{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em}
+footer b{color:var(--white);font-weight:500}
+
+.foot-note{margin-top:26px;padding-top:18px;border-top:1px solid var(--edge)}
+.band .foot-note{border-top-color:rgba(177,207,230,.3)}
+.band .note{color:#9dc0d4}
+
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.band :focus-visible{outline-color:var(--signal)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <strong>3C Construcciones · Campaña Google Ads</strong>
+    <span>Entrega real: 30 may – 3 ago 2026 · 66 días</span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="kicker">La campaña, en una sola línea</p>
+    <p class="query"><span class="q">«</span>empresa constructora Córdoba<span class="q">»</span></p>
+    <p class="thesis">De las once búsquedas que configuramos, una sola sostiene prácticamente toda la campaña. Es la que trae los clics, la que trae las consultas y la que la vendedora reconoce como bien perfiladas.</p>
+
+    <div class="dim" style="--fill:93%">
+      <p class="dim-label">540 de 583 clics</p>
+      <div class="dim-rule">
+        <span class="dim-rest"></span>
+        <span class="tick a"></span>
+        <span class="tick b"></span>
+      </div>
+      <div class="dim-foot">
+        <span>93% de la campaña</span>
+        <span>8% restante: «constructora Córdoba»</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Los números</p>
+    <h2 class="sec">Qué pasó en los primeros 66 días</h2>
+    <p class="lede">La campaña se creó el 8 de mayo, pero el presupuesto se cargó el 25 y recién empezó a mostrarse el 29. El primer peso se gastó el 30 de mayo: eso deja poco más de dos meses de entrega real, con junio y julio como únicos meses completos. El dato más sano es el CTR, estable en torno al 6,8% de punta a punta: el anuncio sigue siendo tan relevante como el primer día.</p>
+
+    <div class="grid">
+      <div class="cell">
+        <p class="k">Inversión</p>
+        <p class="v">768.277<span class="u">ARS</span></p>
+        <p class="s">30 may – 3 ago</p>
+      </div>
+      <div class="cell">
+        <p class="k">Visitas a la landing</p>
+        <p class="v">583</p>
+        <p class="s">clics pagos</p>
+      </div>
+      <div class="cell">
+        <p class="k">Veces que se mostró</p>
+        <p class="v">8.478</p>
+        <p class="s">impresiones</p>
+      </div>
+      <div class="cell">
+        <p class="k">CTR</p>
+        <p class="v">6,88<span class="u">%</span></p>
+        <p class="s">estable de punta a punta</p>
+      </div>
+      <div class="cell">
+        <p class="k">Costo por visita</p>
+        <p class="v">1.318<span class="u">ARS</span></p>
+        <p class="s">promedio</p>
+      </div>
+      <div class="cell">
+        <p class="k">Desde el celular</p>
+        <p class="v">67<span class="u">%</span></p>
+        <p class="s">388 de 583 visitas</p>
+      </div>
+    </div>
+
+    <div class="foot-note">
+      <p class="note">El 67% de celular viene creciendo mes a mes. Por eso la landing se revisa siempre primero en teléfono: es donde se juega la mayoría de las consultas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Las consultas</p>
+    <h2 class="sec">Trece consultas por WhatsApp desde junio</h2>
+    <p class="lede">Este es el conteo que lleva la vendedora sobre los mensajes que efectivamente le llegaron. Julio fue flojo y agosto arrancó fuerte.</p>
+
+    <div class="months" style="border-color:rgba(177,207,230,.3)">
+      <div class="mrow" style="border-color:rgba(177,207,230,.3)">
+        <div class="mname">Junio<em>mes completo</em></div>
+        <div class="mbar"><span class="mfill" style="width:64%"></span><span class="mcount" style="color:#fff">9</span></div>
+      </div>
+      <div class="mrow" style="border-color:rgba(177,207,230,.3)">
+        <div class="mname">Julio<em>mes completo</em></div>
+        <div class="mbar"><span class="mfill" style="width:14%"></span><span class="mcount" style="color:#fff">2</span></div>
+      </div>
+      <div class="mrow now" style="border-color:rgba(177,207,230,.3)">
+        <div class="mname">Agosto<em>1 al 3</em></div>
+        <div class="mbar"><span class="mfill" style="width:14%"></span><span class="mcount" style="color:#fff">2</span></div>
+      </div>
+    </div>
+
+    <div class="cpa">
+      <div>
+        <p class="k">Invertido</p>
+        <p class="v">768.277<span class="u">ARS</span></p>
+        <p class="s">66 días de campaña</p>
+      </div>
+      <div>
+        <p class="k">Consultas recibidas</p>
+        <p class="v">13</p>
+        <p class="s">mensajes de WhatsApp</p>
+      </div>
+      <div class="hi">
+        <p class="k">Costo por consulta</p>
+        <p class="v">59.098<span class="u">ARS</span></p>
+        <p class="s">mensajes efectivamente recibidos</p>
+      </div>
+      <div>
+        <p class="k">El costo que reporta Google</p>
+        <p class="v">27.926<span class="u">ARS</span></p>
+        <p class="s">clics en el botón de contacto</p>
+      </div>
+    </div>
+
+    <div class="foot-note" style="border-top-color:rgba(177,207,230,.3);margin-bottom:8px">
+      <p class="note" style="color:#9dc0d4">Los dos costos miden cosas distintas y conviene tener presente cuál es cuál. El que informa Google cuenta cada clic en el botón de contacto de la landing, que es lo único que la plataforma puede ver. El otro divide toda la inversión por los mensajes que efectivamente le llegaron a la vendedora, y por eso es más alto: entre un número y el otro está la gente que toca el botón, se abre WhatsApp y no termina de enviar el mensaje. Para evaluar la campaña usamos el segundo, que es el exigente.</p>
+    </div>
+
+    <div class="foot-note" style="border-top-color:rgba(177,207,230,.3);margin-bottom:8px">
+      <p class="note" style="color:#cfe2ee">Una consulta de esta campaña no es un mensaje suelto que dice «hola, precio». El formulario de la landing llega con zona, metros estimados, tipo de proyecto —casa nueva, ampliación o reforma—, si la persona ya tiene el terreno, si tiene proyecto arquitectónico y si tiene financiamiento en curso.</p>
+      <p class="note" style="color:#9dc0d4;margin-top:10px">Eso tiene valor incluso cuando la consulta no termina en obra: la vendedora sabe con qué se encuentra antes de responder y prioriza mejor, y cada consulta deja información sobre en qué localidades hay demanda real, qué metrajes se piden y en qué etapa llega la gente. Es dato que sirve para decidir, no solo para vender.</p>
+    </div>
+
+    <div class="foot-note" style="border-top:0;padding-top:0">
+      <p class="note">Sobre la caída de julio: revisamos si la habíamos provocado nosotros y los datos dicen que no. La búsqueda principal mantuvo el mismo volumen de clics y en julio entró más gente a la landing, no menos. Las explicaciones más probables son las vacaciones de invierno y el tamaño chico de la muestra: con solo dos meses completos de entrega y números de un dígito, un mes bueno y uno malo no alcanzan para marcar tendencia. Las dos consultas de los primeros tres días de agosto apuntan en esa dirección, aunque son tres días y hay que confirmarlo con el mes cerrado.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">El hallazgo</p>
+    <h2 class="sec" style="color:#fff">Uno de cada tres quiere construir distinto</h2>
+    <p class="lede" style="color:#cfe2ee">De las búsquedas que Google nos deja ver en detalle, un tercio son de gente que busca un sistema constructivo alternativo al ladrillo tradicional. No lo buscamos: entran solos por la búsqueda principal.</p>
+
+    <div class="finding">
+      <div class="bignum">32%<small>52 de 160 clics<br>con término visible</small></div>
+      <div>
+        <div class="terms">
+          <span class="term">steel frame / steel framing<b>38</b></span>
+          <span class="term">construcción en seco<b>8</b></span>
+          <span class="term">wood frame<b>4</b></span>
+          <span class="term">construcción modular<b>2</b></span>
+        </div>
+        <p class="lede" style="color:#cfe2ee;margin-top:26px">Es el perfil más receptivo al sistema de 3C: ya descartó la construcción convencional y está comparando alternativas. La proporción viene creciendo reporte a reporte: 26% en junio, 28% en julio y 32% ahora. Tres mediciones consecutivas en la misma dirección la vuelven un dato confiable y no la casualidad de un mes.</p>
+        <p class="note" style="color:#9dc0d4;margin-top:16px">Nadie busca la palabra «sustentable»: el Planificador de Google confirmó volumen nulo para ese término en Córdoba. El interés existe, pero se expresa como sistema constructivo. Por eso el mensaje sustentable se trabaja en Instagram y no en los anuncios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Los ajustes</p>
+    <h2 class="sec">Qué cambiamos y por qué</h2>
+    <p class="lede">Tres decisiones tomadas con los datos sobre la mesa, no por intuición.</p>
+
+    <div class="items">
+      <div class="item">
+        <div>
+          <span class="tag">Limpieza</span>
+          <h3>Bloqueo de búsquedas de la competencia</h3>
+        </div>
+        <div>
+          <p>Se cargaron más de 60 términos bloqueados, la mayoría nombres de otras constructoras de Córdoba: quien busca a una empresa puntual por su nombre no es un cliente para 3C.</p>
+          <p class="why">Para qué sirve: cada peso que se iba en mostrar el anuncio a alguien que busca a otra empresa ahora se destina a búsquedas con intención real. Es un trabajo continuo, porque siempre aparecen nombres nuevos.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <span class="tag">Foco</span>
+          <h3>Presupuesto concentrado en lo que convierte</h3>
+        </div>
+        <div>
+          <p>Probamos dos ángulos más: uno apuntado a quienes quieren dejar de alquilar y otro a construcción sustentable. Los dos quedaron en cero impresiones y el Planificador de Google confirmó que esas búsquedas casi no existen en Córdoba.</p>
+          <p class="why">Para qué sirve: con presupuesto acotado, repartirlo entre grupos que no reciben búsquedas le quita combustible al que sí funciona. El grupo de alquiler quedó pausado, no eliminado, por si el escenario cambia.</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <span class="tag">Presencia</span>
+          <h3>Anuncios más completos</h3>
+        </div>
+        <div>
+          <p>Se cargaron cuatro enlaces directos a secciones de la landing, ocho frases destacadas y el listado de servicios (casas llave en mano, duplex, cabañas, ampliaciones, construcción sustentable).</p>
+          <p class="why">Para qué sirve: el anuncio ocupa más espacio en pantalla y le da al usuario más de un motivo para entrar. Google lo señalaba como la mejora pendiente de mayor impacto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">La infraestructura</p>
+    <h2 class="sec">Qué instalamos para dejar de suponer</h2>
+    <p class="lede">Cuando las consultas cayeron en julio no había forma de saber dónde se cortaba el recorrido. Estas herramientas resuelven eso: cada una mide un tramo distinto del camino entre la búsqueda y el mensaje que recibe la vendedora.</p>
+
+    <div class="items" style="border-color:rgba(177,207,230,.3)">
+      <div class="item" style="border-color:rgba(177,207,230,.3)">
+        <div>
+          <span class="tag" style="color:var(--edge)">Base técnica</span>
+          <h3 style="color:#fff">Google Tag Manager</h3>
+        </div>
+        <div>
+          <p style="color:#cfe2ee">Un contenedor instalado una sola vez en la landing, desde el que se agregan o modifican mediciones sin volver a tocar el código del sitio.</p>
+          <p class="why" style="color:#9dc0d4">Para qué sirve: cada medición nueva se activa en minutos y sin depender de una subida al servidor.</p>
+          <span class="status on" style="border-color:var(--edge);color:var(--edge)">Funcionando</span>
+        </div>
+      </div>
+
+      <div class="item" style="border-color:rgba(177,207,230,.3)">
+        <div>
+          <span class="tag" style="color:var(--edge)">Campaña</span>
+          <h3 style="color:#fff">Conversiones de Google Ads</h3>
+        </div>
+        <div>
+          <p style="color:#cfe2ee">Mide cada clic en el botón de WhatsApp de la landing y le devuelve ese dato a la campaña.</p>
+          <p class="why" style="color:#9dc0d4">Para qué sirve: Google aprende qué búsquedas terminan en contacto y prioriza mostrar el anuncio a gente parecida. Sin esto, la campaña optimiza a ciegas.</p>
+          <span class="status on" style="border-color:var(--edge);color:var(--edge)">Funcionando</span>
+        </div>
+      </div>
+
+      <div class="item" style="border-color:rgba(177,207,230,.3)">
+        <div>
+          <span class="tag" style="color:var(--edge)">Comportamiento</span>
+          <h3 style="color:#fff">Google Analytics 4</h3>
+        </div>
+        <div>
+          <p style="color:#cfe2ee">Instalado el 31 de julio. Mide el recorrido dentro de la landing: cuántos llegan, cuántos bajan hasta el formulario, cuántos lo completan y cuántos tocan WhatsApp.</p>
+          <p class="why" style="color:#9dc0d4">Para qué sirve: la próxima vez que bajen las consultas vamos a poder ver en qué escalón se corta el recorrido, en lugar de deducirlo. Es la pieza que faltaba en julio.</p>
+          <span class="status on" style="border-color:var(--edge);color:var(--edge)">Midiendo desde el 31/7</span>
+        </div>
+      </div>
+
+      <div class="item" style="border-color:rgba(177,207,230,.3)">
+        <div>
+          <span class="tag" style="color:var(--edge)">Registro de leads</span>
+          <h3 style="color:#fff">Airtable</h3>
+        </div>
+        <div>
+          <p style="color:#cfe2ee">Cada formulario enviado desde la landing viaja a Airtable de forma automática y queda registrado como lead, con todos los datos que cargó la persona: zona, metros, tipo de proyecto, si tiene terreno, proyecto o financiamiento.</p>
+          <p class="why" style="color:#9dc0d4">Para qué sirve: hoy el conteo de consultas depende de que alguien las cuente a mano en WhatsApp. Con Airtable queda el historial completo, ordenado y consultable por fecha. Bruno y Jero confirmaron que esta semana se empieza a usar.</p>
+          <span class="status soon">Operativo esta semana</span>
+        </div>
+      </div>
+
+      <div class="item" style="border-color:rgba(177,207,230,.3)">
+        <div>
+          <span class="tag" style="color:var(--edge)">Canal gratuito</span>
+          <h3 style="color:#fff">Perfil de Empresa en Google</h3>
+        </div>
+        <div>
+          <p style="color:#cfe2ee">El perfil ya está configurado —categoría, servicios, zonas de trabajo y descripción— pero todavía no está publicado: aún no aparece al buscar 3C en Google ni en Maps. Es posible que Google pida un paso de verificación adicional antes de publicarlo, algo habitual con direcciones rurales.</p>
+          <p class="why" style="color:#9dc0d4">Se configuró como <b style="color:#cfe2ee;font-weight:500">negocio de área de servicio</b>, y eso resuelve un problema concreto: la dirección de facturación es El Rosal, que es una finca de eventos y no un local de 3C. Con esta modalidad la dirección queda oculta y en su lugar se muestran las zonas donde se trabaja —Córdoba Capital, Sierras Chicas, Punilla, Calamuchita—. Nadie ve El Rosal como si fuera la oficina, ni le llega gente sin aviso.</p>
+          <p class="why" style="color:#9dc0d4">Para qué sirve: competir sin pagar por clic en la misma búsqueda que ya trae los leads. Una vez publicado, lo que más rápido mejora la posición son las primeras reseñas.</p>
+          <span class="status soon">Configurado · falta publicación</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <p class="eyebrow">Lo que sigue</p>
+    <h2 class="sec">Próximos pasos</h2>
+
+    <div class="nlist">
+      <div class="nitem">
+        <span class="m">Esta semana</span>
+        <p>Airtable operativo. A partir de ahí el conteo de leads deja de ser manual.</p>
+      </div>
+      <div class="nitem">
+        <span class="m">Esta semana</span>
+        <p>Destrabar la publicación del perfil de empresa y, apenas esté visible, pedir las primeras reseñas a clientes con buena experiencia. Con diez o quince reseñas el perfil compite de igual a igual con las constructoras que hoy aparecen primero.</p>
+      </div>
+      <div class="nitem">
+        <span class="m">Mediados de agosto</span>
+        <p>Primera lectura del recorrido dentro de la landing con datos reales de Analytics.</p>
+      </div>
+      <div class="nitem">
+        <span class="m">Principios de septiembre</span>
+        <p>Cierre de agosto completo para confirmar si el repunte de las consultas se sostiene y descartar del todo la hipótesis estacional. Con tres meses completos va a haber base suficiente para leer la campaña sin depender de un mes aislado.</p>
+      </div>
+      <div class="nitem">
+        <span class="m">Principios de septiembre</span>
+        <p>Decisión de canal: sostener la inversión en Google o probar Meta. Google capta a quien ya está buscando una constructora, que es la demanda más caliente pero también la más acotada. Meta trabaja al revés, mostrando 3C a gente que todavía no la busca, con costos por contacto más bajos y consultas menos maduras. Con los números de agosto cerrados vamos a poder comparar y decidir si conviene mantener el foco, dividir el presupuesto o mover el canal.</p>
+      </div>
+    </div>
+
+    <div class="foot-note">
+      <p class="note">Sobre los números de este informe: los datos de inversión, clics e impresiones son de Google Ads y cubren desde el primer día de entrega real, el 30 de mayo, hasta el 3 de agosto. El conteo de consultas es el que lleva la vendedora sobre los mensajes recibidos por WhatsApp. Google no muestra el detalle de todas las búsquedas por privacidad, así que el 32% de sistemas alternativos se calcula sobre los términos visibles.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>3C Construcciones</b> · Informe de campaña</p>
+    <p>Preparado por RR Studio · 3 de agosto de 2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('section .wrap > *');
+  if(!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el,i){
+    el.classList.add('reveal');
+    el.style.transitionDelay = Math.min(i,4)*45 + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
